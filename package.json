@@ -7,6 +7,7 @@
     "node": ">=20"
   },
   "scripts": {
+    "corpus": "tsx scripts/fetch-corpus.ts",
     "test": "pnpm -r test",
     "typecheck": "pnpm -r typecheck",
     "lint": "eslint ."
@@ -15,6 +16,7 @@
     "@eslint/js": "9.23.0",
     "@types/node": "22.13.14",
     "eslint": "9.23.0",
+    "tsx": "4.19.3",
     "typescript": "5.8.2",
     "typescript-eslint": "8.29.0"
   }
