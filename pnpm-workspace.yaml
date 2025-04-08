@@ -2,6 +2,10 @@ packages:
   - "packages/*"
   - "apps/*"
 
-
+# Packages allowed to run install scripts (onnxruntime-node and sharp fetch native binaries for transformers.js).
 onlyBuiltDependencies:
   - esbuild
+  - onnxruntime-node
+  - protobufjs
+  - sharp
+
