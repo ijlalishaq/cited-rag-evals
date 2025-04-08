@@ -5,6 +5,7 @@
   "type": "module",
   "exports": { ".": "./src/index.ts" },
   "scripts": {
+    "ingest": "tsx src/cli/ingest.ts",
     "test": "vitest run",
     "typecheck": "tsc -p ."
   },

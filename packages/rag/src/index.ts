@@ -4,3 +4,8 @@ export * from "./chunk.js";
 export * from "./bm25.js";
 export * from "./rank.js";
 export * from "./embedders.js";
+export * from "./rerankers.js";
+export * from "./store.js";
+export * from "./retrieve.js";
+export * from "./ingest.js";
+export * from "./paths.js";
