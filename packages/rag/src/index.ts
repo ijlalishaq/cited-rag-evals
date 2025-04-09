@@ -7,5 +7,7 @@ export * from "./embedders.js";
 export * from "./rerankers.js";
 export * from "./store.js";
 export * from "./retrieve.js";
+export * from "./llm.js";
+export * from "./generate.js";
 export * from "./ingest.js";
 export * from "./paths.js";
