@@ -4,6 +4,7 @@ dist/
 data/corpus/
 data/index/
 data/logs/
+evals-out/
 *.log
 .DS_Store
 *.tsbuildinfo

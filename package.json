@@ -10,6 +10,9 @@
     "corpus": "tsx scripts/fetch-corpus.ts",
     "ingest": "pnpm --filter @cre/rag ingest",
     "ask": "pnpm --filter @cre/rag ask",
+    "eval": "pnpm --filter @cre/evals eval",
+    "eval:smoke": "pnpm --filter @cre/evals eval --subset smoke",
+    "check-gold": "pnpm --filter @cre/evals check-gold",
     "test": "pnpm -r test",
     "typecheck": "pnpm -r typecheck",
     "lint": "eslint ."
