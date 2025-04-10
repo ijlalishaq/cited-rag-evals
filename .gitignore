@@ -3,6 +3,7 @@ dist/
 .env
 data/corpus/
 data/index/
+data/logs/
 *.log
 .DS_Store
 *.tsbuildinfo

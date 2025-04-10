@@ -9,6 +9,7 @@
   "scripts": {
     "corpus": "tsx scripts/fetch-corpus.ts",
     "ingest": "pnpm --filter @cre/rag ingest",
+    "ask": "pnpm --filter @cre/rag ask",
     "test": "pnpm -r test",
     "typecheck": "pnpm -r typecheck",
     "lint": "eslint ."

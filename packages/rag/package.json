@@ -6,6 +6,7 @@
   "exports": { ".": "./src/index.ts" },
   "scripts": {
     "ingest": "tsx src/cli/ingest.ts",
+    "ask": "tsx src/cli/ask.ts",
     "test": "vitest run",
     "typecheck": "tsc -p ."
   },

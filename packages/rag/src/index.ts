@@ -10,5 +10,8 @@ export * from "./retrieve.js";
 export * from "./llm.js";
 export * from "./generate.js";
 export * from "./verify.js";
+export * from "./pipeline.js";
+export * from "./log.js";
+export * from "./factory.js";
 export * from "./ingest.js";
 export * from "./paths.js";
