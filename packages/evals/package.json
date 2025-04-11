@@ -5,8 +5,10 @@
   "type": "module",
   "scripts": {
     "eval": "tsx src/cli/eval.ts",
+    "gate": "tsx src/cli/gate.ts",
     "test": "vitest run",
     "typecheck": "tsc -p .",
+    "ablate": "tsx src/cli/ablate.ts",
     "check-gold": "tsx src/cli/check-gold.ts"
   },
   "dependencies": {

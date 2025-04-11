@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+import { compare } from "../src/gate.js";
 import { containsEvidence } from "../src/gold.js";
 import { aggregate, type QuestionResult } from "../src/metrics.js";
 import { bootstrapCI } from "../src/stats.js";
@@ -55,5 +56,26 @@ describe("aggregate", () => {
     expect(m.falseRefusalRate.value).toBe(0.5);
     expect(m.refusalAccuracy.value).toBe(0.5);
     expect(m.draftCitationPrecision.value).toBe(0.5);
+  });
+});
+
+describe("compare (CI gate)", () => {
+  const base = aggregate([result({}), result({ correct: false })]);
+
+  it("passes when nothing drops", () => {
+    expect(compare(base, base).some((r) => r.failed)).toBe(false);
+  });
+
+  it("fails when a metric drops by more than the allowed points", () => {
+    const worse = aggregate([result({ correct: false }), result({ correct: false })]);
+    const row = compare(base, worse).find((r) => r.metric === "answerCorrectness")!;
+    expect(row.deltaPoints).toBeCloseTo(-50);
+    expect(row.failed).toBe(true);
+  });
+
+  it("treats a rise in false refusals as a drop", () => {
+    const refusing = aggregate([result({}), result({ abstained: true, correct: false })]);
+    const row = compare(base, refusing).find((r) => r.metric === "falseRefusalRate")!;
+    expect(row.failed).toBe(true);
   });
 });

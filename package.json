@@ -12,7 +12,9 @@
     "ask": "pnpm --filter @cre/rag ask",
     "eval": "pnpm --filter @cre/evals eval",
     "eval:smoke": "pnpm --filter @cre/evals eval --subset smoke",
+    "ablate": "pnpm --filter @cre/evals ablate",
     "check-gold": "pnpm --filter @cre/evals check-gold",
+    "gate": "pnpm --filter @cre/evals gate",
     "test": "pnpm -r test",
     "typecheck": "pnpm -r typecheck",
     "lint": "eslint ."
