@@ -15,3 +15,4 @@ export * from "./log.js";
 export * from "./factory.js";
 export * from "./ingest.js";
 export * from "./paths.js";
+export * from "./highlight.js";
