@@ -12,7 +12,7 @@ const { values } = parseArgs({
   options: {
     gold: { type: "string", default: "gold/gold.jsonl" },
     subset: { type: "string", default: "all" },
-    reranker: { type: "string", default: process.env.RERANKER ?? "offline" },
+    reranker: { type: "string", default: process.env.RERANKER || "offline" },
   },
 });
 const subset = values.subset === "smoke" ? "smoke" : "all";

@@ -60,7 +60,7 @@ export class CrossEncoderReranker implements Reranker {
   }
 }
 
-export function createReranker(kind = process.env.RERANKER ?? "offline"): Reranker | null {
+export function createReranker(kind = process.env.RERANKER || "offline"): Reranker | null {
   if (kind === "none") return null;
   if (kind === "offline") return new OverlapReranker();
   if (kind === "local") return new CrossEncoderReranker(process.env.RERANKER_MODEL);

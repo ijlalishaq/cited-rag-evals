@@ -87,7 +87,7 @@ export class TransformersEmbedder implements Embedder {
   }
 }
 
-export function createEmbedder(kind = process.env.EMBEDDER ?? "offline"): Embedder {
+export function createEmbedder(kind = process.env.EMBEDDER || "offline"): Embedder {
   if (kind === "offline") return new HashEmbedder();
   if (kind === "local") return new TransformersEmbedder(process.env.EMBEDDING_MODEL);
   throw new Error(`Unknown EMBEDDER "${kind}" (expected offline | local)`);
