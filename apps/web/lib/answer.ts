@@ -1,4 +1,15 @@
-import { createPipeline, logQuery, QUERY_LOG, reflow, SearchIndex, supportingSpan, type RagAnswer, type RagPipeline, type Span } from "@cre/rag";
+import {
+  createPipeline,
+  INDEX_PATH,
+  logQuery,
+  QUERY_LOG,
+  reflow,
+  SearchIndex,
+  supportingSpan,
+  type RagAnswer,
+  type RagPipeline,
+  type Span,
+} from "@cre/rag";
 
 /** What the browser receives: citations renumbered 1..n in order of first use. */
 export interface AskResponse {
@@ -13,11 +24,9 @@ export interface AskResponse {
 
 let pipeline: Promise<RagPipeline> | undefined;
 
-/** Load the index once per server process; it's ~30 MB of JSON. */
+/** Load the index once per server process, not once per request. */
 export function getPipeline(): Promise<RagPipeline> {
-  pipeline ??= SearchIndex.load(process.env.INDEX_PATH ?? `${process.env.REPO_ROOT}/data/index/index.json`).then((index) =>
-    createPipeline(index),
-  );
+  pipeline ??= SearchIndex.load(INDEX_PATH).then((index) => createPipeline(index));
   return pipeline;
 }
 
