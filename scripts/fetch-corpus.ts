@@ -1,7 +1,7 @@
 // Downloads a slice of the Node.js API docs (MIT licensed) at a pinned tag into data/corpus/.
 // Pinning the tag and the page list keeps the corpus, and therefore the gold set and eval
-// numbers, reproducible. 17 core pages (~1.4 MB, ~1,900 chunks) are plenty to learn on and
-// embed in a minute or two on a laptop CPU. Set NODE_DOCS_PAGES=all to fetch every page.
+// numbers, reproducible. 17 core pages (~1.4 MB, ~1,750 chunks) are plenty to learn on and
+// embed with BGE-small in a few minutes on a laptop CPU. Set NODE_DOCS_PAGES=all to fetch every page.
 import { mkdir, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 

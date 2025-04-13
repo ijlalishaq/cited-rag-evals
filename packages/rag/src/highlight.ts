@@ -63,7 +63,7 @@ export function sentenceSpans(text: string): Span[] {
 
 /**
  * Finds the sentence in `source` that best supports `claim`, by share of the claim's content
- * words it contains (FR-11). Returns null when nothing overlaps enough to be worth pointing at.
+ * words it contains. Returns null when nothing overlaps enough to be worth pointing at.
  */
 export function supportingSpan(claim: string, source: string, minOverlap = 0.3): Span | null {
   const want = [...new Set(contentTerms(claim))];

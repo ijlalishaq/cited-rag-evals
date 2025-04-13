@@ -143,11 +143,11 @@ export class OllamaChatModel implements ChatModel {
 }
 
 /**
- * Structured output on a small model: put the JSON Schema at the END of the user prompt
- * (a 1.5B model given several thousand tokens of sources forgets format instructions that
- * sit in the system prompt, and answers in plain prose), parse the reply leniently (code fences and surrounding prose stripped), validate it with Zod, and
- * retry once if the model produced something that doesn't fit. We get typed
- * objects instead of free text, which is what makes each citation machine-checkable.
+ * Structured output on a small model. The JSON Schema goes at the END of the user prompt:
+ * with a couple of thousand tokens of sources in between, a 1.5B model forgets format
+ * instructions in the system prompt and answers in prose. The reply is parsed leniently
+ * (code fences and surrounding prose stripped), validated with Zod, and retried once if it
+ * doesn't fit.
  */
 export async function generateStructured<S extends z.ZodType>(
   model: ChatModel,

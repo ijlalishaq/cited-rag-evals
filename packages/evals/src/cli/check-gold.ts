@@ -1,4 +1,4 @@
-// pnpm --filter @cre/evals check-gold — every evidence quote must appear in some chunk of the index.
+// pnpm check-gold: every evidence quote must appear in some chunk of the index.
 import { INDEX_PATH, SearchIndex } from "@cre/rag";
 import { containsEvidence, loadGold } from "../gold.js";
 

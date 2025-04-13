@@ -55,7 +55,7 @@ Instead of asking for prose with `[1]` markers, we ask for JSON that matches a Z
 { answerable: boolean, sentences: [{ text, sources: number[] }] }
 ```
 
-A 1.5B model on a CPU has no "JSON mode" to lean on, so `generateStructured` turns the Zod schema into a JSON Schema, puts it in the system prompt, pulls the first JSON object out of the reply and validates it, retrying up to three times. (Ollama can also constrain decoding to the schema, which we pass along when it is the backend.) Now every claim is a separate, machine-checkable object.
+A 1.5B model on a CPU has no "JSON mode" to lean on, so `generateStructured` turns the Zod schema into a JSON Schema and appends it to the *end* of the user message (in the system prompt, the model forgot it once it had read a few thousand tokens of sources). It pulls the JSON object out of the reply, validates it, and tries once more if that fails. Ollama can also constrain decoding to the schema, so we pass it along when Ollama is the backend. Now every claim is a separate, machine-checkable object.
 
 Sources are wrapped in `<source>` tags. The system prompt says their content is **data, not instructions**. This is the first defence against prompt injection from documents.
 
@@ -64,8 +64,8 @@ Sources are wrapped in `<source>` tags. The system prompt says their content is 
 Models cite sources that don't actually say what the sentence says. For every **(sentence, cited source)** pair we ask: does this source alone entail the sentence? This is a **natural language inference** (NLI) task.
 
 - Citations that fail are removed. Sentences left with no citation are dropped and kept in `dropped` for debugging.
-- All pairs go in **one batched call**, so verification costs one model run, not N. On a CPU that is the difference between seconds and minutes.
-- The default local verifier is an **NLI cross-encoder** (`NliVerifier`, DeBERTa-v3-xsmall). NLI models are trained on short premises, so it checks one- and two-sentence windows of the source and keeps the best entailment score.
+- The default local verifier is an **NLI cross-encoder** (`NliVerifier`, DeBERTa-v3-xsmall). NLI models are trained on short premises, so it checks one- and two-sentence windows of the source and keeps the best entailment score. It is small enough that one forward pass per pair is fine.
+- The chat-model verifier (`LlmVerifier`, `VERIFIER=llm`) puts every pair in **one batched prompt** instead, because a 1.5B model on a CPU takes tens of seconds per call. It also turned out to be much worse at the job than the NLI model.
 - **Post-hoc attribution:** a sentence the generator left uncited is checked against every retrieved passage, and keeps any that entail it.
 - The offline `LexicalVerifier` requires most content words, and every number, to appear in the source. It catches invented numbers but not negation ("must" vs "must not").
 
